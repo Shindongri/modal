@@ -46,14 +46,12 @@ function App() {
   return (
     <Container className="app">
       <Button onClick={handleOpen}>OPEN</Button>
-      <CSSTransition in={isOpen} timeout={500} classNames="modal" unmountOnExit>
-        <Modal isOpen={isOpen} onClose={handleClose}>
-          <ModalBody>
-            <h1>Text in a modal</h1>
-            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-          </ModalBody>
-        </Modal>
-      </CSSTransition>
+      <Modal isOpen={isOpen} onClose={handleClose}>
+        <ModalBody>
+          <h2>Text in a modal</h2>
+          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+        </ModalBody>
+      </Modal>
     </Container>
   );
 }

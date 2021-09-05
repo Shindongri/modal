@@ -12,7 +12,7 @@ const Portal: React.FC<Props> = ({ children, selector }) => {
     <>
       {rootElement ? createPortal(children, rootElement) : children}
     </>
-  );
+  )
 }
 
 export default Portal;

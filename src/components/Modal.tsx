@@ -1,16 +1,18 @@
 import React from 'react';
+import { CSSTransition } from 'react-transition-group';
 import styled from '@emotion/styled/macro';
-import './modal.css';
 
+import './modal.css';
 import Portal from './Portal';
 
 const Overlay = styled.div`
   position: fixed;
-  z-index: 99;
+  z-index: 10;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -34,23 +36,18 @@ const Container = styled.div`
 interface Props {
   isOpen: boolean;
   onClose: () => void;
+  selector?: string;
 }
 
-const Modal: React.FC<Props> = ({ children, onClose, isOpen }) => {
-  return (
-    <>
-      {
-        isOpen && (
-          <Portal selector="#modal-root">
-            <Overlay>
-              <Dim onClick={onClose} />
-              <Container>{children}</Container>
-            </Overlay>
-          </Portal>
-        )
-      }
-    </>
-  )
-}
+const Modal: React.FC<Props> = ({ children, onClose, isOpen, selector = '#modal-root' }) => (
+  <CSSTransition in={isOpen} timeout={300} classNames="modal" unmountOnExit>
+    <Portal selector={selector}>
+      <Overlay>
+        <Dim onClick={onClose} />
+        <Container>{children}</Container>
+      </Overlay>
+    </Portal>
+  </CSSTransition>
+)
 
 export default Modal;
